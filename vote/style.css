@@ -18,6 +18,8 @@ html, body {
     background-size: 20px 20px;
     background-color: #fff;
     background-position: -14px 14px;
+    padding: 10px 40px;
+    overflow-y: scroll;
 }
 
 header {
@@ -129,7 +131,7 @@ input[type='text']:focus {
     background: #8CC63F20;
 }
 
-#modal button {
+button {
     display: block;
     background-color: #8CC63F;
     color: #fff;
@@ -139,4 +141,50 @@ input[type='text']:focus {
     width: fit-content;
     border: none;
     margin: 10px 10px;
+}
+
+.word {
+    position: relative;
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    margin: 20px auto;
+    max-width: 100%;
+    opacity: 0;
+    animation: word .3s forwards;
+}
+
+.word::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: attr(count);
+    height: 100%;
+    width: 3rem;
+    background-color: #555;
+    color: #fff;
+}
+
+.word[count='1']::after {
+    background-color: #ff4b00;
+}
+
+@keyframes word {
+    0% {
+        opacity: 0;
+        left: 20px;
+    }
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}
+
+.str {
+    font-size: 1.5rem;
+}
+.count {
+    color: #555;
 }
