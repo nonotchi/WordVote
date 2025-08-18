@@ -1,3 +1,7 @@
+const modalBack = document.getElementById('modal-back');
+const modal = document.getElementById('modal');
+const text = document.getElementById('title');
+
 window.addEventListener('DOMContentLoaded', () => {
     yotsuba(30);
 });
@@ -19,3 +23,26 @@ yotsuba = (count) => {
         elem.style.animationDuration = `${duration}s`
     }
 }
+
+document.getElementById('open').addEventListener('click', () => {
+    modalBack.style.display = 'block';
+    modal.style.display = 'block';
+});
+
+modalBack.addEventListener('focus', () => {
+    modalBack.style.display = 'none';
+    modal.style.display = 'none';
+});
+
+document.getElementById('start').addEventListener('click', () => {
+    if (!text.value) {
+        return;
+    }
+
+    if (confirm(`投票「${text.value}」を開始します。`)) {
+        const random = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16)))).substring(0, 16);
+        setTimeout(() => {
+            window.location.href = `${location.href.slice(-1) === '/' ? location.href : location.href + '/'}vote/?id=${random}`;
+        }, 1000);
+    }
+});

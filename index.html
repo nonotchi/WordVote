@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,17 @@
     <div class="description">WordVote（ワードボート）は、あるテーマについて参加者が自由に単語を出し、その単語に投票をして多数決をとるアンケートアプリです。</div>
 
     <div class="menu">
-        <a href="">START</a>
-        <a href="">JOIN</a>
-        <a href="">ABOUT</a>
+        <button id="open">START</button>
+        <div>&copy; 2025 <a href="https://nonotchi.tech/" target="_blank">ののっち</a></div>
     </div>
+
+    <div id="modal-back" tabindex="0"></div>
+    <div id="modal">
+        <h2>お題</h2>
+        <input type="text" id="title">
+        <button id="start">投票を開始</button>
+    </div>
+
     <script src="index.js"></script>
 </body>
 </html>

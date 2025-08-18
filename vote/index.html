@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>__ - WordVote</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="../"><img src="../yotsuba.png" alt="WordVote"></a>
+        <div id="title">ここにお題が入ります</div>
+    </header>
+
+    <div id="board"></div>
+
+    <button id="open">追加</button>
+    <button id="copy">URLコピー</button>
+
+    <div id="modal-back" tabindex="0"></div>
+    <div id="modal">
+        <h2>回答を追加</h2>
+        <input type="text" id="word">
+        <button id="add">回答を追加</button>
+    </div>
+    
+    <script src="vote.js"></script>
+</body>
+</html>
