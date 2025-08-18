@@ -125,6 +125,10 @@ update = () => {
 window.addEventListener('DOMContentLoaded', update);
 
 document.getElementById('add').addEventListener('click', () => {
+    if (!document.getElementById('word').value) {
+        return;
+    }
+    
     words.push({
         id: `test${idCount}`,
         str: document.getElementById('word').value,
