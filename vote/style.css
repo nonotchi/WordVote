@@ -19,6 +19,7 @@ html, body {
     background-color: #fff;
     background-position: -14px 14px;
     padding: 10px 40px;
+    padding-bottom: 140px;
     overflow-y: scroll;
 }
 
