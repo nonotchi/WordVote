@@ -84,6 +84,7 @@ update = () => {
 
         voteBtn.addEventListener('click', () => {
             words[i].isVoted = true;
+            voteBtn.disabled = true;
             if (ws) {
                 ws.send(JSON.stringify({
                     action: "sendmessage",
@@ -177,12 +178,18 @@ ws.onmessage = (event) => {
                     document.title = `${data[i].word} - WordVote`;
                     document.getElementById('title').textContent = data[i].word;
                 } else {
+                    let shouldContinue = false;
                     for (let j = 0; j < words.length; j++) {
                         if (words[j].id === data[i].wordid) {
                             words[j].votes = data[i].votes;
-                            continue;
+                            shouldContinue = true;
                         }
                     }
+
+                    if (shouldContinue) {
+                        continue;
+                    }
+
                     words.push({
                         id: data[i].wordid,
                         str: data[i].word,
