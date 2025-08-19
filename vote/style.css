@@ -144,6 +144,10 @@ button {
     margin: 10px 10px;
 }
 
+button:disabled {
+    background: #ccc;
+}
+
 .word {
     position: relative;
     background-color: #f1f1f1;
