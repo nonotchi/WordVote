@@ -176,21 +176,21 @@ ws.onopen = (event) => {
 }
 
 ws.onmessage = (event) => {
-    console.log(event);
-
     if (event.data === 'Not found') {
         document.getElementById('title').textContent = '存在しない投票です';
-    } else if (event.data[0].wordid !== void 0) {
-        for (let i = 0; i < event.data.length; i++) {
-            if (event.data[i].wordid === '-') {
-                document.title = `${event.data[i].word} - WordVote`;
-                document.getElementById('title').textContent = event.data[i].word;
+    } else {
+        const data = JSON.parse(event.data);
+        if (data[0].wordid !== void 0) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].wordid === '-') {
+                document.title = `${data[i].word} - WordVote`;
+                document.getElementById('title').textContent = data[i].word;
             } else {
                 words = [];
                 words.push({
-                    id: event.data[i].wordid,
-                    str: event.data[i].word,
-                    votes: event.data[i].votes,
+                    id: data[i].wordid,
+                    str: data[i].word,
+                    votes: data[i].votes,
                     isVoted: false,
                     rank: 0
                 });
