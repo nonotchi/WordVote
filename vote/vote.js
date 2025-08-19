@@ -93,10 +93,9 @@ update = () => {
         voteBtn.className = 'vote-button';
         voteBtn.innerText = `投票する！`;
 
-        // TODO: 複数回投票できないようにするには、ここのコメントを外す
-        /*if (words[i].isVoted) {
+        if (words[i].isVoted) {
             voteBtn.disabled = true;
-        }*/
+        }
 
         voteBtn.addEventListener('click', () => {
             words[i].votes += 1;
