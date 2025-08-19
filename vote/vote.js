@@ -1,7 +1,6 @@
 let url = new URL(window.location.href);
 let params = url.searchParams;
 let voteId = params.get('id');
-let connection = null;
 
 let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1');
 
@@ -172,10 +171,6 @@ ws.onmessage = (event) => {
     } else {
         const data = JSON.parse(event.data);
         console.log(data);
-
-        if (data.connection !== void 0) {
-            connection = data.connection;
-        }
 
         if (data[0].wordid !== void 0) {
             for (let i = 0; i < data.length; i++) {
