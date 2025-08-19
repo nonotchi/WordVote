@@ -148,6 +148,7 @@ button {
     position: relative;
     background-color: #f1f1f1;
     padding: 10px 20px;
+    padding-right: calc(5px + 3rem);
     margin: 20px auto;
     max-width: 100%;
     opacity: 0;
