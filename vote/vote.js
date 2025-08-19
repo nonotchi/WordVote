@@ -1,3 +1,7 @@
+let voteId = location.search;
+
+let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1/');
+
 const modalBack = document.getElementById('modal-back');
 const modal = document.getElementById('modal');
 
@@ -20,24 +24,13 @@ modalBack.addEventListener('focus', () => {
     modal.style.display = 'none';
 });
 
-let words = [
-    {
-        id: "test1",
-        str: "ララピー",
-        votes: 0,
-        isVoted: false,
-        rank: 0,
-    },
-];
-
+let words = [];
 let oldWords = [];
 let idCount = 5;
 
 update = () => {
     const board = document.getElementById('board');
     board.innerHTML = '';
-
-    // TODO: IPアドレスで複数投票を制限
 
     // ランキング更新
     let sorted = [...words].sort((a, b) => b.votes - a.votes);
@@ -86,7 +79,13 @@ update = () => {
         voteBtn.addEventListener('click', () => {
             words[i].votes += 1;
             words[i].isVoted = true;
-            update();
+            if (ws) {
+                ws.send(JSON.stringify({
+                    type: 'vote',
+                    voteid: voteId,
+                    wordid: words[i].id
+                }))
+            }
         });
         
         elem.appendChild(wordStr);
@@ -133,9 +132,56 @@ document.getElementById('add').addEventListener('click', () => {
         rank: 0,
     });
 
+
+    if (ws) {
+        ws.send(JSON.stringify({
+            type: 'add',
+            voteid: voteId,
+            word: txtbx.value
+        }))
+    }
+
     txtbx.value = '';
-    update();
 
     modalBack.style.display = 'none';
     modal.style.display = 'none';
 });
+
+ws.onopen = (event) => {
+    ws.send(JSON.stringify({
+        type: 'get',
+        voteid: voteId,
+    }));
+}
+
+ws.onmessage = (event) => {
+    console.log(event);
+    
+    if (event.data === 'Not found') {
+        document.getElementById('title').textContent = '存在しない投票です';
+    } else {
+        for (let i = 0; i < event.data.length; i++) {
+            if (event.data[i].wordid === '-') {
+                document.title = `${event.data[i].word} - WordVote`;
+                document.getElementById('title').textContent = event.data[i].word;
+            } else {
+                words = [];
+                words.push({
+                    id: event.data[i].wordid,
+                    str: event.data[i].word,
+                    votes: event.data[i].votes,
+                    isVoted: false,
+                    rank: 0
+                });
+            }
+        }
+        update();
+    }
+}
+
+test = () => {
+    ws.send(JSON.stringify({
+        type: 'start',
+        voteid: voteId,
+    }))
+}  
