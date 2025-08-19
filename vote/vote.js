@@ -23,30 +23,23 @@ modalBack.addEventListener('focus', () => {
 let words = [
     {
         id: "test1",
-        str: "これはテストです",
+        str: "ララピー",
         votes: 0,
         isVoted: false,
         rank: 0,
     },
     {
         id: "test2",
-        str: "これはテストだよ。",
-        votes: 2,
-        isVoted: true,
-        rank: 0,
-    },
-    {
-        id: "test3",
-        str: "てすとだよーん",
+        str: "ツインテールの地雷系女子",
         votes: 0,
         isVoted: false,
         rank: 0,
     },
     {
-        id: "test4",
-        str: "This is a test.",
-        votes: 4,
-        isVoted: true,
+        id: "test3",
+        str: "好きな人",
+        votes: 0,
+        isVoted: false,
         rank: 0,
     },
 ];
