@@ -156,10 +156,10 @@ ws.onopen = (event) => {
 
 ws.onmessage = (event) => {
     console.log(event);
-    
+
     if (event.data === 'Not found') {
         document.getElementById('title').textContent = '存在しない投票です';
-    } else {
+    } else if (event.data[0].wordid !== void 0) {
         for (let i = 0; i < event.data.length; i++) {
             if (event.data[i].wordid === '-') {
                 document.title = `${event.data[i].word} - WordVote`;
