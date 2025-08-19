@@ -28,20 +28,6 @@ let words = [
         isVoted: false,
         rank: 0,
     },
-    {
-        id: "test2",
-        str: "ツインテールの地雷系女子",
-        votes: 0,
-        isVoted: false,
-        rank: 0,
-    },
-    {
-        id: "test3",
-        str: "好きな人",
-        votes: 0,
-        isVoted: false,
-        rank: 0,
-    },
 ];
 
 let oldWords = [];
