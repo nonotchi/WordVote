@@ -159,7 +159,8 @@ button:disabled {
     animation: word .3s forwards;
 }
 
-.word::after {
+.word[count='1位']::after {
+    background-color: #ff4b00;
     position: absolute;
     top: 0;
     right: 0;
@@ -169,12 +170,7 @@ button:disabled {
     content: attr(count);
     height: 100%;
     width: 3rem;
-    background-color: #555;
     color: #fff;
-}
-
-.word[count='1位']::after {
-    background-color: #ff4b00;
 }
 
 @keyframes word {
