@@ -89,6 +89,7 @@ update = () => {
                 ws.send(JSON.stringify({
                     action: "sendmessage",
                     type: 'vote',
+                    voteid: voteId,
                     wordid: words[i].id
                 }));
             }
@@ -134,6 +135,7 @@ document.getElementById('add').addEventListener('click', () => {
         ws.send(JSON.stringify({
             action: "sendmessage",
             type: 'add',
+            voteid: voteId,
             word: txtbx.value
         }));
     }
@@ -151,14 +153,18 @@ ws.onopen = (event) => {
         ws.send(JSON.stringify({
             action: "sendmessage",
             type: 'start',
+            voteid: voteId,
             name: params.get('name')
         }));
     }
 
-    ws.send(JSON.stringify({
-        action: "sendmessage",
-        type: 'get',
-    }));
+    setTimeout(() => {
+        ws.send(JSON.stringify({
+            action: "sendmessage",
+            type: 'get',
+            voteid: voteId,
+        }));
+    }, 100);
 }
 
 ws.onmessage = (event) => {
