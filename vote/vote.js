@@ -115,9 +115,10 @@ update = () => {
         elem.appendChild(votesCount);
         elem.appendChild(voteBtn);
 
-        if (oldWords[i] == void 0 || words[i].rank != oldWords[i].rank) {
-            elem.style.animation = 'word .3s forwards';
+        if (oldWords[i] == void 0) {
             elem.style.animationDelay = `${String(i * 0.07)}s`;
+        } else if (words[i].rank != oldWords[i].rank) {
+            elem.style.animation = 'word .3s forwards';
         } else {
             elem.style.animation = 'none';
             elem.style.opacity = 1;
