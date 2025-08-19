@@ -85,12 +85,12 @@ update = () => {
             words[i].votes += 1;
             words[i].isVoted = true;
             if (ws) {
-                ws.send(JSON.stringify({
+                ws.send({
                     action: "sendmessage",
                     type: 'vote',
                     voteid: voteId,
                     wordid: words[i].id
-                }))
+                });
             }
         });
         
@@ -140,12 +140,12 @@ document.getElementById('add').addEventListener('click', () => {
 
 
     if (ws) {
-        ws.send(JSON.stringify({
+        ws.send({
             action: "sendmessage",
             type: 'add',
             voteid: voteId,
             word: txtbx.value
-        }))
+        });
     }
 
     txtbx.value = '';
@@ -155,11 +155,21 @@ document.getElementById('add').addEventListener('click', () => {
 });
 
 ws.onopen = (event) => {
-    ws.send(JSON.stringify({
+    let url = new URL(window.location.href);
+    let params = url.searchParams;
+    if (params.has('name')) {
+        ws.send({
+            action: "sendmessage",
+            type: 'start',
+            voteid: voteId,
+        });
+    }
+
+    ws.send({
         action: "sendmessage",
         type: 'get',
         voteid: voteId,
-    }));
+    });
 }
 
 ws.onmessage = (event) => {
@@ -186,11 +196,3 @@ ws.onmessage = (event) => {
         update();
     }
 }
-
-test = () => {
-    ws.send(JSON.stringify({
-        action: "sendmessage",
-        type: 'start',
-        voteid: voteId,
-    }))
-}  
