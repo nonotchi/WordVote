@@ -1,6 +1,6 @@
 let url = new URL(window.location.href);
 let params = url.searchParams;
-let voteId = params.id;
+let voteId = params.get('id');
 
 let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1');
 
@@ -164,7 +164,7 @@ ws.onopen = (event) => {
             action: "sendmessage",
             type: 'start',
             voteid: voteId,
-            name: params.name
+            name: params.get('name')
         }));
     }
 
