@@ -162,6 +162,7 @@ ws.onopen = (event) => {
             action: "sendmessage",
             type: 'start',
             voteid: voteId,
+            name: params.name
         }));
     }
 
