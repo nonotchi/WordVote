@@ -25,7 +25,7 @@ def lambda_handler(event, context):
 
     vote_id = body.get('voteid')
     apigateway = boto3.client('apigatewaymanagementapi',
-                                    endpoint_url="https://\{URL\}.execute-api.ap-northeast-1.amazonaws.com/v1?voteid=" + vote_id)
+                                    endpoint_url="https://{URL}.execute-api.ap-northeast-1.amazonaws.com/v1?voteid=" + vote_id)
 
     if vote_id is None:
         return { 'statusCode': 400,'body': 'bad request' }
