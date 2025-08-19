@@ -2,7 +2,7 @@ let url = new URL(window.location.href);
 let params = url.searchParams;
 let voteId = params.get('id');
 
-let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1');
+let ws = new WebSocket(`wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1?voteid=${voteId}`);
 
 const modalBack = document.getElementById('modal-back');
 const modal = document.getElementById('modal');
