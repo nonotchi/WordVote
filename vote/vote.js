@@ -1,13 +1,18 @@
 let voteId = location.search;
 
-let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1/');
+let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1');
 
 const modalBack = document.getElementById('modal-back');
 const modal = document.getElementById('modal');
 
 document.getElementById('copy').addEventListener('click', (e) => {
     const oldStr = e.target.textContent;
-    navigator.clipboard.writeText(location.href);
+
+    let url = new URL(window.location.href);
+    let params = url.searchParams;
+    params.delete('name');
+
+    navigator.clipboard.writeText(url);
     e.target.textContent = 'コピーしました！';
     setTimeout(() => {
         e.target.textContent = oldStr;

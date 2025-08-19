@@ -42,7 +42,7 @@ document.getElementById('start').addEventListener('click', () => {
     if (confirm(`投票「${text.value}」を開始します。`)) {
         const random = btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16)))).substring(0, 16);
         setTimeout(() => {
-            window.location.href = `${location.href.slice(-1) === '/' ? location.href : location.href + '/'}vote/?id=${random}`;
+            window.location.href = `${location.href.slice(-1) === '/' ? location.href : location.href + '/'}vote/?id=${random}&name=${text.value}`;
         }, 1000);
     }
 });
