@@ -187,17 +187,17 @@ ws.onmessage = (event) => {
                 } else {
                     for (let j = 0; j < words.length; j++) {
                         if (words[j].id === data[i].wordid) {
-                            words[j].votes = data[i].votes
-                        } else {
-                            words.push({
-                                id: data[i].wordid,
-                                str: data[i].word,
-                                votes: data[i].votes,
-                                isVoted: false,
-                                rank: 0
-                            });
+                            words[j].votes = data[i].votes;
+                            continue;
                         }
-                    }                    
+                    }
+                    words.push({
+                        id: data[i].wordid,
+                        str: data[i].word,
+                        votes: data[i].votes,
+                        isVoted: false,
+                        rank: 0
+                    });                
                 }
             }
             update();
