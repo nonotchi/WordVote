@@ -33,7 +33,6 @@ modalBack.addEventListener('focus', () => {
 
 let words = [];
 let oldWords = [];
-let idCount = 5;
 
 update = () => {
     const board = document.getElementById('board');
@@ -130,15 +129,6 @@ document.getElementById('add').addEventListener('click', () => {
             return;
         }
     }
-    
-    words.push({
-        id: `test${idCount}`,
-        str: txtbx.value,
-        votes: 0,
-        isVoted: false,
-        rank: 0,
-    });
-
 
     if (ws) {
         ws.send(JSON.stringify({
@@ -179,6 +169,8 @@ ws.onmessage = (event) => {
         document.getElementById('title').textContent = '存在しない投票です';
     } else {
         const data = JSON.parse(event.data);
+        console.log(data);
+
         if (data[0].wordid !== void 0) {
             for (let i = 0; i < data.length; i++) {
                 if (data[i].wordid === '-') {
@@ -198,7 +190,6 @@ ws.onmessage = (event) => {
                         isVoted: false,
                         rank: 0
                     });
-                    continue;
                 }
             }
             update();
