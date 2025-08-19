@@ -197,7 +197,8 @@ ws.onmessage = (event) => {
                         votes: data[i].votes,
                         isVoted: false,
                         rank: 0
-                    });                
+                    });
+                    continue;
                 }
             }
             update();
