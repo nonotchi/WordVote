@@ -1,4 +1,6 @@
-const voteId = new URL(window.location.href).searchParams.id
+let url = new URL(window.location.href);
+let params = url.searchParams;
+let voteId = params.id;
 
 let ws = new WebSocket('wss://uyur613b6d.execute-api.ap-northeast-1.amazonaws.com/v1');
 
