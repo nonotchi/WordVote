@@ -168,7 +168,7 @@ button {
     color: #fff;
 }
 
-.word[count='1']::after {
+.word[count='1位']::after {
     background-color: #ff4b00;
 }
 

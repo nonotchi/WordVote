@@ -51,6 +51,7 @@ let words = [
     },
 ];
 
+let oldWords = [];
 let idCount = 5;
 
 update = () => {
@@ -85,7 +86,7 @@ update = () => {
     for (let i = 0; i < words.length; i++) {
         const elem = document.createElement('div');
         elem.className = 'word';
-        elem.setAttribute('count', words[i].rank == 0 ? '' : String(words[i].rank));
+        elem.setAttribute('count', words[i].rank == 0 ? '' : String(words[i].rank) + '位');
 
         const wordStr = document.createElement('div');
         wordStr.className = 'str';
@@ -94,8 +95,6 @@ update = () => {
         const votesCount = document.createElement('div');
         votesCount.className = 'count';
         votesCount.innerText = `${words[i].votes}票`;
-
-        // TODO: 投票ボタン
 
         const voteBtn = document.createElement('button');
         voteBtn.className = 'vote-button';
@@ -116,10 +115,18 @@ update = () => {
         elem.appendChild(votesCount);
         elem.appendChild(voteBtn);
 
-        elem.style.animationDelay = `${String(i * 0.02)}s`
-
+        if (oldWords[i] == void 0 || words[i].rank != oldWords[i].rank) {
+            elem.style.animation = 'word .3s forwards';
+            elem.style.animationDelay = `${String(i * 0.07)}s`;
+        } else {
+            elem.style.animation = 'none';
+            elem.style.opacity = 1;
+        }
+     
         board.appendChild(elem);
     }
+    
+    oldWords = words;
 }
 
 window.addEventListener('DOMContentLoaded', update);
