@@ -133,19 +133,29 @@ update = () => {
 window.addEventListener('DOMContentLoaded', update);
 
 document.getElementById('add').addEventListener('click', () => {
-    if (!document.getElementById('word').value) {
+    const txtbx = document.getElementById('word');
+
+    if (!txtbx.value) {
         return;
+    }
+
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].str === txtbx.value) {
+            // 重複
+            alert(`「${txtbx.value}」はすでに存在しています`);
+            return;
+        }
     }
     
     words.push({
         id: `test${idCount}`,
-        str: document.getElementById('word').value,
+        str: txtbx.value,
         votes: 0,
         isVoted: false,
         rank: 0,
     });
 
-    document.getElementById('word').value = '';
+    txtbx.value = '';
     update();
 
     modalBack.style.display = 'none';
