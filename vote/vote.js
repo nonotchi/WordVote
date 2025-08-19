@@ -81,6 +81,7 @@ update = () => {
             words[i].isVoted = true;
             if (ws) {
                 ws.send(JSON.stringify({
+                    action: "sendmessage",
                     type: 'vote',
                     voteid: voteId,
                     wordid: words[i].id
@@ -135,6 +136,7 @@ document.getElementById('add').addEventListener('click', () => {
 
     if (ws) {
         ws.send(JSON.stringify({
+            action: "sendmessage",
             type: 'add',
             voteid: voteId,
             word: txtbx.value
@@ -149,6 +151,7 @@ document.getElementById('add').addEventListener('click', () => {
 
 ws.onopen = (event) => {
     ws.send(JSON.stringify({
+        action: "sendmessage",
         type: 'get',
         voteid: voteId,
     }));
@@ -181,6 +184,7 @@ ws.onmessage = (event) => {
 
 test = () => {
     ws.send(JSON.stringify({
+        action: "sendmessage",
         type: 'start',
         voteid: voteId,
     }))
