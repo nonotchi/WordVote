@@ -181,21 +181,22 @@ ws.onmessage = (event) => {
     } else {
         const data = JSON.parse(event.data);
         if (data[0].wordid !== void 0) {
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].wordid === '-') {
-                document.title = `${data[i].word} - WordVote`;
-                document.getElementById('title').textContent = data[i].word;
-            } else {
-                words = [];
-                words.push({
-                    id: data[i].wordid,
-                    str: data[i].word,
-                    votes: data[i].votes,
-                    isVoted: false,
-                    rank: 0
-                });
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].wordid === '-') {
+                    document.title = `${data[i].word} - WordVote`;
+                    document.getElementById('title').textContent = data[i].word;
+                } else {
+                    words = [];
+                    words.push({
+                        id: data[i].wordid,
+                        str: data[i].word,
+                        votes: data[i].votes,
+                        isVoted: false,
+                        rank: 0
+                    });
+                }
             }
+            update();
         }
-        update();
     }
 }
