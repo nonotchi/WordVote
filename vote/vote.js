@@ -83,15 +83,23 @@ update = () => {
         }
 
         voteBtn.addEventListener('click', () => {
-            words[i].isVoted = true;
-            voteBtn.disabled = true;
-            if (ws) {
-                ws.send(JSON.stringify({
-                    action: "sendmessage",
-                    type: 'vote',
-                    voteid: voteId,
-                    wordid: words[i].id
-                }));
+            // 重複投票防止 (localStorage使用)
+            if (localStorage.getItem(`wordvote_voted_${voteId}`) === 'true') {
+                alert('投票済みです。重複投票はできません。');
+                return;
+            } else {
+                localStorage.setItem(`wordvote_voted_${voteId}`, 'true');
+
+                words[i].isVoted = true;
+                voteBtn.disabled = true;
+                if (ws) {
+                    ws.send(JSON.stringify({
+                        action: "sendmessage",
+                        type: 'vote',
+                        voteid: voteId,
+                        wordid: words[i].id
+                    }));
+                }
             }
         });
         
