@@ -78,7 +78,7 @@ update = () => {
         voteBtn.className = 'vote-button';
         voteBtn.innerText = `投票する！`;
 
-        if (localStorage.getItem(`wordvote_voted_${voteId}`) === 'true') {
+        if (localStorage.getItem(`wordvote_voted_${words[i].id}`) === 'true') {
             words[i].isVoted = true;
         }
 
@@ -88,12 +88,11 @@ update = () => {
 
         voteBtn.addEventListener('click', () => {
             // 重複投票防止 (localStorage使用)
-            if (localStorage.getItem(`wordvote_voted_${voteId}`) === 'true') {
+            if (localStorage.getItem(`wordvote_voted_${words[i].id}`) === 'true') {
                 alert('投票済みです。重複投票はできません。');
                 return;
             } else {
-                localStorage.setItem(`wordvote_voted_${voteId}`, 'true');
-
+                localStorage.setItem(`wordvote_voted_${words[i].id}`, 'true');
                 words[i].isVoted = true;
                 voteBtn.disabled = true;
                 if (ws) {
