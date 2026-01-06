@@ -78,6 +78,10 @@ update = () => {
         voteBtn.className = 'vote-button';
         voteBtn.innerText = `投票する！`;
 
+        if (localStorage.getItem(`wordvote_voted_${voteId}`) === 'true') {
+            words[i].isVoted = true;
+        }
+
         if (words[i].isVoted) {
             voteBtn.disabled = true;
         }
